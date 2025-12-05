@@ -12,8 +12,21 @@ const sizes = {
 }
 
 const modals = {
-  computer: document.querySelector(".modal.computer")
+  computer: document.querySelector(".modal.computer_modal"),
+  ljr: document.querySelector(".modal.ljr_modal"),
+  beachhouse: document.querySelector(".modal.beach_house_modal"),
+  sunset: document.querySelector(".modal.sunset_modal"),
+  headphones: document.querySelector(".modal.headphone_modal"),
 };
+
+const objectToModalMap = {
+  "screen": modals.computer,
+  "ljr": modals.ljr,
+  "beach_house": modals.beachhouse,
+  "sunset": modals.sunset,
+  "headphones": modals.headphones,
+};
+
 
 const loadingScreen = document.getElementById("loading-screen");
 const loadingText = document.getElementById("loading-text");
@@ -92,17 +105,23 @@ scene.background = new THREE.Color(0x2B2006);
 // scene.add(directional);
 
 const camera = new THREE.PerspectiveCamera( 45, sizes.width / sizes.height, 0.1, 1000 );
-camera.position.set( 16.466313436582585, 12.01559489761902, 15.383367852330123 );
+const targetPosition = new THREE.Vector3(16.466, 12.015, 15.383);
+camera.position.set(60, 55, 60);
 
-window.addEventListener("click", (event)=>{
+// camera.position.set( 16.466313436582585, 12.01559489761902, 15.383367852330123 );
+
+window.addEventListener("click", (event) => {
   if (currentIntersects.length > 0) {
-    const object = currentIntersects[0].object
-    if (object.name.includes("screen")) {
-      showModal(modals.computer);
-    } 
-    // else if...
+    const objectName = currentIntersects[0].object.name;
+
+    for (const [key, modal] of Object.entries(objectToModalMap)) {
+      if (objectName.includes(key)) {
+        showModal(modal);
+        break;
+      }
+    }
   }
-})
+});
 
 window.addEventListener("mousemove", (event)=>{
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -115,6 +134,9 @@ loader.load("/models/490BAKE_wmats.glb", (glb) => {
     if (child.isMesh && child.material) {
       // console.log(child.name);
       if (child.material.map) {
+        if (child.material.color) {
+          child.material.color.multiplyScalar(2);
+        }
         // child.material.map.colorSpace = THREE.SRGBColorSpace;
         child.material.map.flipY = false;                 
         child.material.map.minFilter = THREE.LinearFilter;   
@@ -141,13 +163,44 @@ loader.load("/models/490BAKE_wmats.glb", (glb) => {
   enterButton.style.pointerEvents = "auto";
 });
 
+const bgMusic = document.getElementById("bg-music");
+const musicToggle = document.getElementById("music-toggle");
+
+let musicOn = true; // starts on after Enter click
+
+musicToggle.addEventListener("click", () => {
+  if (!bgMusic) return;
+
+  musicOn = !musicOn;
+  bgMusic.muted = !musicOn;
+
+  musicToggle.textContent = musicOn ? "music toggle (on)" : "music toggle (off)";
+});
+
 enterButton.addEventListener("click", () => {
-  gsap.to(loadingScreen, {
+  gsap.to("#loading-screen", {
     opacity: 0,
-    duration: 1,
+    duration: 0.6,
+    onComplete: () => { 
+      document.getElementById("loading-screen").style.display = "none";
+    }
+  });
+
+  if (bgMusic) {
+    bgMusic.volume = 0.8;
+    bgMusic.play().catch(err => console.log("Audio play blocked:", err));
+    musicOn = true;
+    musicToggle.textContent = "music toggle (on)";
+  }
+
+  gsap.to(camera.position, {
+    x: targetPosition.x,
+    y: targetPosition.y,
+    z: targetPosition.z,
+    duration: 3, // animation length in seconds
     ease: "power2.out",
-    onComplete: () => {
-      loadingScreen.style.display = "none";
+    onUpdate: () => {
+      controls.update(); // make sure OrbitControls follows
     }
   });
 });
@@ -165,7 +218,6 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
-controls.update();
 controls.target.set( -0.29182966212449946, 2.1487034528194586, -0.970514859558168 );
 
 controls.minDistance = 5;
@@ -175,6 +227,7 @@ controls.maxPolarAngle = Math.PI / 2;
 controls.minAzimuthAngle = 0;
 controls.maxAzimuthAngle = Math.PI / 2;
 
+controls.update();
 
 // event listeners
 window.addEventListener("resize", ()=>{

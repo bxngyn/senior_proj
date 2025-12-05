@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brandon's Portfolio</title>
   </head>
@@ -10,18 +10,60 @@
     <div id="app"></div>
 
     <div id="loading-screen">
-      <div id="loading-text">
-        Loading<span class="dots">...</span>
+      <div id="loading-center">
+        <div id="loading-text">
+          Loading<span class="dots">...</span>
+        </div>
+        <div id="enter-button">Enter</div>
       </div>
+    
       <div id="controls-hint">
         Click & drag to move camera <br> Pinch to zoom in/out
       </div>
-      <div id="enter-button">Enter</div>
+    </div>
+    <button id="music-toggle">Toggle Music</button>
+
+    <audio id="bg-music" src="/audio/oscarpetersontrio.mp3" loop></audio>
+
+    <div class="modal computer_modal">
+      <h1 class="modal-title">
+        work, about...
+      </h1>
+      <button class="modal-exit-button">
+        EXIT MODAL
+      </button>
     </div>
 
-    <div class="computer modal">
+    <div class="modal ljr_modal">
       <h1 class="modal-title">
-        zzzzzzzzzzzz
+        my friends!
+      </h1>
+      <button class="modal-exit-button">
+        EXIT MODAL
+      </button>
+    </div>
+
+    <div class="modal beach_house_modal">
+      <h1 class="modal-title">
+        beach house
+      </h1>
+      <button class="modal-exit-button">
+        EXIT MODAL
+      </button>
+    </div>
+
+    <div class="modal sunset_modal">
+      <h1 class="modal-title">
+        sunset
+      </h1>
+      <button class="modal-exit-button">
+        EXIT MODAL
+      </button>
+    </div>
+
+    <div class="modal headphone_modal">
+      <h1 class="modal-title">
+        music
       </h1>
       <button class="modal-exit-button">
         EXIT MODAL

@@ -31,14 +31,14 @@
 
 // modal
 .modal {
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 32px;
-  z-index: 999;
-  display: none;
   background-color: white;
+  z-index: 9999;
 }
 
 #loading-screen {
@@ -47,13 +47,27 @@
   background: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center;  /* vertically center */
+  align-items: center;      /* horizontally center */
   font-size: 2rem;
   font-weight: 600;
   z-index: 9999;
   opacity: 1;
   pointer-events: all;
+  gap: 20px;                /* space between center group and hint */
+}
+
+#loading-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;  /* space between loading text and enter button */
+}
+
+#controls-hint {
+  color: black;
+  font-size: 1rem;
+  text-align: center;
 }
 
 #enter-button {
@@ -70,13 +84,6 @@
   background: #eee;
 }
 
-#controls-hint {
-  color: black;
-  font-size: 1rem;
-  text-align: center;
-  margin-top: 10px;
-}
-
 /* smaller on small screens */
 @media (max-width: 480px) {
   #controls-hint {
@@ -85,4 +92,17 @@
     left: 12px;
     padding: 6px 10px;
   }
+}
+
+#music-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
 }
