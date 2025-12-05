@@ -15,6 +15,11 @@ const modals = {
   computer: document.querySelector(".modal.computer")
 };
 
+const loadingScreen = document.getElementById("loading-screen");
+const loadingText = document.getElementById("loading-text");
+const enterButton = document.getElementById("enter-button");
+
+
 document.querySelectorAll(".modal-exit-button").forEach(button=>{
   button.addEventListener("click", (e) => {
     const modal = e.target.closest(".modal");
@@ -76,7 +81,7 @@ Object.entries(textureMap).forEach(([key, path]) => {
 
 const scene = new THREE.Scene();
 // scene.background = new THREE.Color(0xffffff);
-scene.background = new THREE.Color(0xEDE8CA);
+scene.background = new THREE.Color(0x2B2006);
 // scene.background = textureLoader.load("/textures/bigbro.png");
 
 // const ambient = new THREE.AmbientLight(0xffffff, 1.2);  
@@ -104,15 +109,15 @@ window.addEventListener("mousemove", (event)=>{
   pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
 });
 
-loader.load("/models/490BAKE_wmatsss.glb", (glb) => {
-  // Optional: fix color space and flipY for all textures in the GLB
+// loader.load("https://drive.google.com/uc?export=download&id=1bvqIDd5raKCNwvobjSjYMealgCj1MSRt", (glb) => {
+loader.load("/models/490BAKE_wmats.glb", (glb) => {
   glb.scene.traverse((child) => {
     if (child.isMesh && child.material) {
       // console.log(child.name);
       if (child.material.map) {
-        // child.material.map.colorSpace = THREE.SRGBColorSpace; // ensures correct colors
-        child.material.map.flipY = false;                     // GLTF convention
-        child.material.map.minFilter = THREE.LinearFilter;    // optional, improves scaling
+        // child.material.map.colorSpace = THREE.SRGBColorSpace;
+        child.material.map.flipY = false;                 
+        child.material.map.minFilter = THREE.LinearFilter;   
         // child.material.emissive = new THREE.Color(0xffffff);   // white glow
         // child.material.emissiveIntensity = 0.5;                // adjust brightness
       }
@@ -127,11 +132,24 @@ loader.load("/models/490BAKE_wmatsss.glb", (glb) => {
     }
   });
 
-  // Rotate the entire model if needed
   glb.scene.rotation.y = Math.PI;
 
-  // Add to the scene
   scene.add(glb.scene);
+
+  loadingText.textContent = "";
+  gsap.to(enterButton, { opacity: 1, duration: 0.5 });
+  enterButton.style.pointerEvents = "auto";
+});
+
+enterButton.addEventListener("click", () => {
+  gsap.to(loadingScreen, {
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+    onComplete: () => {
+      loadingScreen.style.display = "none";
+    }
+  });
 });
 
 
@@ -170,21 +188,64 @@ window.addEventListener("resize", ()=>{
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 });
 
-// function playHoverAnimation(object, isHovering) {
-//   if (object.userData.isAnimating) {
-//     return;
-//   }
-//   else {
-//     object.userData.isAnimating = true;
-//   }
-//   if (isHovering) {
-//     gsap.to(object.scale {
-//       x: object.userData.initialScale.x * 1.2,
-//       y: object.userData.initialScale.y * 1.2,
-//       z: object.userData.initialScale.x * 1.2,
-//     })
-//   }
-// }
+function playHoverAnimation(object, isHovering) {
+  gsap.killTweensOf(object.scale);
+  // gsap.killTweensOf(object.rotation);
+  // gsap.killTweensOf(object.position);
+
+  if (isHovering) {
+    gsap.to(object.scale, {
+      x: object.userData.initialScale.x * 1.5,
+      y: object.userData.initialScale.y * 1.5,
+      z: object.userData.initialScale.z * 1.5,
+      duration: 0.5,
+      // ease: "bounce.out(0.5)",
+    });
+    // gsap.to(object.rotation, {
+    //   x: object.userData.initialScale.x * Math.PI / 8,
+    //   duration: 0.5,
+    //   ease: "bounce.out(1.8)",
+    //   onComplete: ()=> {
+    //     object.userData.isAnimating = false;
+    //   }
+    // });
+  }
+  else {
+    gsap.to(object.scale, {
+      x: object.userData.initialScale.x,
+      y: object.userData.initialScale.y,
+      z: object.userData.initialScale.z,
+      duration: 0.3,
+      // ease: "bounce.out(0.5)",
+    });
+    // gsap.to(object.rotation, {
+    //   x: object.userData.initialScale.x,
+    //   duration: 0.3,
+    //   ease: "bounce.out(1.8)",
+    //   onComplete: ()=> {
+    //     object.userData.isAnimating = false;
+    //   }
+    // });
+  }
+}
+
+function playDrawerAnimation(object, isHovering) {
+  gsap.killTweensOf(object.position);
+
+  if (isHovering) {
+    gsap.to(object.position, {
+      z: object.userData.initialPosition.z - 0.75, // drawer slides outward
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  } else {
+    gsap.to(object.position, {
+      z: object.userData.initialPosition.z,
+      duration: 0.3,
+      ease: "power2.inOut",
+    });
+  }
+}
 
 const render = () => {
   controls.update();
@@ -199,18 +260,47 @@ const render = () => {
   raycaster.setFromCamera( pointer, camera );
   currentIntersects = raycaster.intersectObjects(raycasterObjects, true);
 
-  for (let i = 0; i < currentIntersects.length; i++) {
-    currentIntersects[i].object.material.color.set(0xff0000);
-  }
+  // for (let i = 0; i < currentIntersects.length; i++) {
+  //   currentIntersects[i].object.material.color.set(0xff0000);
+  // }
 
   if (currentIntersects.length > 0) {
-    // const currObject = currentIntersects[0].object;
-    // playHoverAnimation(currentHoveredObject, true);
-
-
+    const currObject = currentIntersects[0].object;
+  
+    if (currObject !== currentHoveredObject) {
+      
+      // Reset old hovered object
+      if (currentHoveredObject) {
+        if (currentHoveredObject.name.includes("extend")) {
+          playDrawerAnimation(currentHoveredObject, false);
+        } else {
+          playHoverAnimation(currentHoveredObject, false);
+        }
+      }
+  
+      // Apply NEW animation depending on type
+      if (currObject.name.includes("extend")) {
+        playDrawerAnimation(currObject, true);
+      } else {
+        playHoverAnimation(currObject, true);
+      }
+  
+      currentHoveredObject = currObject;
+    }
+  
     document.body.style.cursor = "pointer";
   }
   else {
+    // No hover → reset active animations
+    if (currentHoveredObject) {
+      if (currentHoveredObject.name.includes("extend")) {
+        playDrawerAnimation(currentHoveredObject, false);
+      } else {
+        playHoverAnimation(currentHoveredObject, false);
+      }
+      currentHoveredObject = null;
+    }
+  
     document.body.style.cursor = "default";
   }
 

@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>490</title>
+    <title>Brandon's Portfolio</title>
   </head>
   <body>
     <div id="app"></div>
+
+    <div id="loading-screen">
+      <div id="loading-text">
+        Loading<span class="dots">...</span>
+      </div>
+      <div id="controls-hint">
+        Click & drag to move camera <br> Pinch to zoom in/out
+      </div>
+      <div id="enter-button">Enter</div>
+    </div>
 
     <div class="computer modal">
       <h1 class="modal-title">
@@ -17,6 +27,7 @@
         EXIT MODAL
       </button>
     </div>
+
     <div id="experience">
       <canvas id="experience-canvas" class="experience-canvas"></canvas>
     </div>
