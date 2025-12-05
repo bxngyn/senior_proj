@@ -55,7 +55,8 @@ const tabText = document.getElementById("computer-tab-text");
 
 const tabContents = {
   about: "Hi, I'm Brandon! I'm currently a senior at Yale University pursuing a B.S. in Computer Science with an interest in full-stack software development. Outside of tech, I love music in all forms (listening to, playing, and composing)!",
-  work: "Here is some of my work..."
+  work: "Here is some of my work...",
+  contact: "Feel free to contact me at brandon.nguyen@yale.edu."
 };
 
 // Start on About

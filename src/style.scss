@@ -262,3 +262,47 @@ body, button {
   accent-color: black; 
   flex-shrink: 0;     /* don’t shrink the circle */
 }
+
+.scrollable-images {
+  flex: 0 0 250px;      /* keep the fixed width of left side */
+  max-height: 400px;    /* or whatever fits your modal */
+  overflow-y: auto;     /* scroll vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;            /* space between images */
+  padding-right: 8px;   /* optional, space for scrollbar */
+}
+
+.scrollable-images::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-images::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
+}
+
+.scrollable-images::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sunset_modal .modal-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.sunset_modal .modal-left {
+  flex: 0 0 250px;
+}
+
+.sunset_modal .modal-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.sunset_modal .modal-right {
+  flex: 1;
+}
