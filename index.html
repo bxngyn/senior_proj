@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Brandon's Portfolio</title>
   </head>
   <body>
@@ -14,6 +15,7 @@
         <div id="loading-text">
           Loading<span class="dots">...</span>
         </div>
+        
         <div id="enter-button">Enter</div>
       </div>
     
@@ -26,12 +28,24 @@
     <audio id="bg-music" src="/audio/oscarpetersontrio.mp3" loop></audio>
 
     <div class="modal computer_modal">
-      <h1 class="modal-title">
-        work, about...
-      </h1>
-      <button class="modal-exit-button">
-        EXIT MODAL
-      </button>
+      <div class="modal-content computer-content">
+        
+        <!-- Tab links -->
+        <div class="tab-links">
+          <button class="tab-link active" data-tab="about">About</button>
+          <button class="tab-link" data-tab="work">Work</button>
+        </div>
+    
+        <!-- Tab content -->
+        <div class="tab-body" id="computer-tab-body">
+          <p id="computer-tab-text">
+            <!-- Hi, I'm Brandon! I am currently a senior studying computer science at Yale University.   -->
+          </p>
+        </div>
+    
+      </div>
+    
+      <button class="modal-exit-button">leave</button>
     </div>
 
     <div class="modal ljr_modal">
@@ -44,12 +58,22 @@
     </div>
 
     <div class="modal beach_house_modal">
-      <h1 class="modal-title">
-        beach house
-      </h1>
-      <button class="modal-exit-button">
-        EXIT MODAL
-      </button>
+      <div class="modal-content">
+        
+        <div class="modal-left">
+          <img class="modal-image" src="/images/beachhouseposter.jpg" alt="Beach House Poster">
+        </div>
+    
+        <div class="modal-right">
+          <h1 class="modal-title">Music</h1>
+          <p class="modal-description">
+            Listening to and playing music is one of my favorite things to do in my free time. <br><br> The poster on the left is of Beach House, a dream pop / shoegaze band that's one of my favorite artists (they were my #1 on my Spotify Wrapped this year!). Take a look at my <a href="https://open.spotify.com/user/panorrie?si=27a1d39bf0554db8">Spotify profile</a> to get a better taste of what I like to listen to :p <br><br> Also, find the headphones in the scene to change the music you're listening to right now.
+          </p>
+        </div>
+    
+      </div>
+    
+      <button class="modal-exit-button">leave</button>
     </div>
 
     <div class="modal sunset_modal">
@@ -62,12 +86,45 @@
     </div>
 
     <div class="modal headphone_modal">
-      <h1 class="modal-title">
-        music
-      </h1>
-      <button class="modal-exit-button">
-        EXIT MODAL
-      </button>
+      <div class="modal-content">
+        <h1 class="modal-title">Currently listening to...</h1>
+        <form id="song-form">
+          <label>
+            <input type="radio" name="song" value="/audio/oscarpetersontrio.mp3" checked>
+            I Got It Bad (And That Ain't Good) by the Oscar Peterson Trio
+          </label><br>
+          <label>
+            <input type="radio" name="song" value="/audio/drunkinla_quiet.mp3">
+            Drunk in LA by Beach House
+          </label><br>
+          <label>
+            <input type="radio" name="song" value="/audio/fuemejor_quiet.mp3">
+            Fue Mejor by Kali Uchis (feat. SZA)
+          </label><br>
+          <!-- <label>
+            <input type="radio" name="song" value="/audio/song4.mp3">
+            Song 4
+          </label><br>
+          <label>
+            <input type="radio" name="song" value="/audio/song5.mp3">
+            Song 5
+          </label> -->
+        </form>
+      </div>
+    
+      <button class="modal-exit-button">leave</button>
+    </div>
+
+    <div class="modal calendar_modal">
+      <div class="modal-content">
+    
+        <div class="modal-right">
+          <p class="modal-description" id="calendar-date">
+          </p>
+        </div>
+    
+      </div>
+      <button class="modal-exit-button">leave</button>
     </div>
 
     <div id="experience">

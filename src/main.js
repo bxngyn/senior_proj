@@ -5,6 +5,75 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import gsap from "gsap";
 
+// select the paragraph for date/time
+const calendarDateEl = document.getElementById('calendar-date');
+
+function updateCalendarDate() {
+  const now = new Date();
+
+  // Format the time
+  const timeOptions = { hour: 'numeric', minute: 'numeric'};
+  const timeStr = now.toLocaleTimeString(undefined, timeOptions);
+
+  // Format the date
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const dateStr = now.toLocaleDateString(undefined, dateOptions);
+
+  // Set the content
+  calendarDateEl.innerHTML = `It is ${timeStr} on ${dateStr}. <br><br> Doesn't time go by so fast?`;
+}
+
+// update immediately
+updateCalendarDate();
+
+// optional: update every second so time ticks
+setInterval(updateCalendarDate, 1000);
+
+const songForm = document.getElementById("song-form");
+// const currentSongTitle = document.getElementById("current-song-title");
+
+// // Initialize title
+// currentSongTitle.textContent = "Currently listening to...";
+
+songForm.addEventListener("change", (e) => {
+  if (e.target.name === "song") {
+    const songSrc = e.target.value;
+    // const songName = e.target.nextSibling.textContent.trim();
+
+    // update audio
+    bgMusic.src = songSrc;
+    bgMusic.play().catch(err => console.log("Audio play blocked:", err));
+
+    // // update modal title
+    // currentSongTitle.textContent = `Currently listening to: ${songName}`;
+  }
+});
+
+// inside your main.js or script
+const tabLinks = document.querySelectorAll(".computer_modal .tab-link");
+const tabText = document.getElementById("computer-tab-text");
+
+const tabContents = {
+  about: "Hi, I'm Brandon! I'm currently a senior at Yale University pursuing a B.S. in Computer Science with an interest in full-stack software development. Outside of tech, I love music in all forms (listening to, playing, and composing)!",
+  work: "Here is some of my work..."
+};
+
+// Start on About
+tabText.textContent = tabContents.about;
+
+tabLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    // Remove active class from all links
+    tabLinks.forEach(l => l.classList.remove("active"));
+    // Add active to clicked link
+    link.classList.add("active");
+
+    // Change the content
+    const tab = link.getAttribute("data-tab");
+    tabText.textContent = tabContents[tab];
+  });
+});
+
 const canvas = document.querySelector("#experience-canvas")
 const sizes = {
   width: window.innerWidth,
@@ -17,6 +86,7 @@ const modals = {
   beachhouse: document.querySelector(".modal.beach_house_modal"),
   sunset: document.querySelector(".modal.sunset_modal"),
   headphones: document.querySelector(".modal.headphone_modal"),
+  calendar: document.querySelector(".modal.calendar_modal")
 };
 
 const objectToModalMap = {
@@ -25,6 +95,7 @@ const objectToModalMap = {
   "beach_house": modals.beachhouse,
   "sunset": modals.sunset,
   "headphones": modals.headphones,
+  "calendar": modals.calendar
 };
 
 
@@ -187,7 +258,7 @@ enterButton.addEventListener("click", () => {
   });
 
   if (bgMusic) {
-    bgMusic.volume = 0.8;
+    bgMusic.volume = 0.65;
     bgMusic.play().catch(err => console.log("Audio play blocked:", err));
     musicOn = true;
     musicToggle.textContent = "music toggle (on)";
