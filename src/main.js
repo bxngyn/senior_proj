@@ -54,13 +54,62 @@ const tabLinks = document.querySelectorAll(".computer_modal .tab-link");
 const tabText = document.getElementById("computer-tab-text");
 
 const tabContents = {
-  about: "Hi, I'm Brandon! I'm currently a senior at Yale University pursuing a B.S. in Computer Science with an interest in full-stack software development. Outside of tech, I love music in all forms (listening to, playing, and composing)!",
-  work: "Here is some of my work...",
+  about: "Hi, I'm Brandon! <br><br> I'm currently a senior at Yale University pursuing a B.S. in Computer Science with an interest in full-stack software development. Outside of tech, I love music in all forms (listening to, playing, and composing)!",
+  work: `
+    <div class="work-item">
+      <div class="work-middle">
+          <h2 class="work-title">
+          <a href="https://github.com/bxngyn/yale-roomtable" class="work-link" target="_blank">
+            RoomTable
+          </a>
+        </h2>
+        <p class="work-description">
+          A website that helps Yale College go through the housing selection process in a less stressful manner. The website supports features such as searching using filters, adding friends, ranking suites, and reading and writing reviews. Built using Python, Flask, React, TypeScript, Tailwind CSS, and SQLAlchemy.
+        </p>
+      </div>
+      <div class="work-right">
+        <p class="work-year">2025</p>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-middle">
+        <h2 class="work-title">
+          <a href="https://youtu.be/lzIVSQKz8-w" class="work-link" target="_blank">
+            Distributed Ray Tracer
+          </a>
+        </h2>
+        <p class="work-description">
+          A C++ implementation of distributed ray tracing algorithms. Some features that were implemented include the Phong shading model which utilized Monte Carlo sampling to simulate diffuse/specular lighting, mirror/glossy
+          reflections, refractions, and soft shadows. I used the program to render a creative video in a 3D scene.
+        </p>
+      </div>
+      <div class="work-right">
+        <p class="work-year">2024</p>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="work-middle">
+        <h2 class="work-title">
+          <a href="https://github.com/bxngyn/auras-in-music" class="work-link" target="_blank">
+            Auras in Music
+          </a>
+        </h2>
+        <p class="work-description">
+          A flask web application that utilizes user input to recommend songs from Spotify databases.
+        </p>
+      </div>
+      <div class="work-right">
+        <p class="work-year">2022</p>
+      </div>
+    </div>
+  `,
   contact: "Feel free to contact me at brandon.nguyen@yale.edu."
 };
 
 // Start on About
-tabText.textContent = tabContents.about;
+tabText.innerHTML = tabContents["about"];
 
 tabLinks.forEach(link => {
   link.addEventListener("click", () => {
@@ -71,7 +120,7 @@ tabLinks.forEach(link => {
 
     // Change the content
     const tab = link.getAttribute("data-tab");
-    tabText.textContent = tabContents[tab];
+    tabText.innerHTML = tabContents[tab];
   });
 });
 
