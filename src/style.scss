@@ -10,15 +10,12 @@ body, button {
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-// experience
 #experience {
   position: fixed;
   height: 100%;
@@ -26,14 +23,13 @@ body, button {
   top: 0;
   left: 0;
   overflow: hidden;
-
-  #experience-canvas {
-    height: 100%;
-    width: 100%;
-  }
 }
 
-// modal
+#experience #experience-canvas {
+  height: 100%;
+  width: 100%;
+}
+
 .modal {
   display: none;
   position: absolute;
@@ -50,12 +46,11 @@ body, button {
   position: absolute;
   bottom: 20px;
   right: 20px;
-
-  font-size: 1.2rem;    /* bigger text */
-  padding: 12px 20px;   /* bigger button */
+  font-size: 1.2rem;
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  background: #000;     /* choose your color */
+  background: #000;
   color: white;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -108,7 +103,7 @@ body, button {
 }
 
 .modal-left {
-  flex: 0 0 250px; /* the poster stays this width */
+  flex: 0 0 250px;
 }
 
 .modal-image {
@@ -118,7 +113,7 @@ body, button {
 }
 
 .modal-right {
-  flex: 1; /* text expands */
+  flex: 1;
 }
 
 .modal-title {
@@ -137,21 +132,21 @@ body, button {
   background: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* vertically center */
-  align-items: center;      /* horizontally center */
+  justify-content: center;
+  align-items: center;
   font-size: 2rem;
   font-weight: 600;
   z-index: 9999;
   opacity: 1;
   pointer-events: all;
-  gap: 20px;                /* space between center group and hint */
+  gap: 20px;
 }
 
 #loading-center {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;  /* space between loading text and enter button */
+  gap: 20px;
 }
 
 #controls-hint {
@@ -163,8 +158,6 @@ body, button {
 #enter-button {
   opacity: 0;
   pointer-events: none;
-
-  /* Match modal exit button style */
   font-family: 'EB Garamond', serif;
   font-size: 1.2rem;
   padding: 12px 20px;
@@ -180,7 +173,6 @@ body, button {
   opacity: 0.7;
 }
 
-/* smaller on small screens */
 @media (max-width: 480px) {
   #controls-hint {
     font-size: 0.85rem;
@@ -206,7 +198,7 @@ body, button {
 .calendar_modal .modal-content {
   display: flex;
   gap: 20px;
-  flex-direction: column; /* just one column for text */
+  flex-direction: column;
   padding: 20px;
   background-color: white;
 }
@@ -227,8 +219,8 @@ body, button {
 
 .headphone_modal .modal-title {
   font-size: 2rem;
-  margin: 0 0 12px;   /* keep bottom margin */
-  padding: 0 20px;    /* add left/right padding */
+  margin: 0 0 12px;
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
@@ -238,39 +230,39 @@ body, button {
   padding: 20px;
   background-color: white;
   border-radius: 12px;
-  width: 400px;       /* adjust width */
-  max-width: 90vw;    /* responsive */
+  width: 400px;
+  max-width: 90vw;
 }
 
 #song-form {
-  padding: 0;  /* let modal-content handle the padding */
+  padding: 0;
 }
 
 #song-form label {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 100%;        /* make label full width */
+  width: 100%;
   cursor: pointer;
   padding: 8px 12px;
   border-radius: 8px;
   transition: background 0.2s;
-  font-size: 1rem;    /* smaller text */
+  font-size: 1rem;
 }
 
 #song-form input[type="radio"] {
-  accent-color: black; 
-  flex-shrink: 0;     /* don’t shrink the circle */
+  accent-color: black;
+  flex-shrink: 0;
 }
 
 .scrollable-images {
-  flex: 0 0 250px;      /* keep the fixed width of left side */
-  max-height: 400px;    /* or whatever fits your modal */
-  overflow-y: auto;     /* scroll vertically */
+  flex: 0 0 250px;
+  max-height: 400px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;            /* space between images */
-  padding-right: 8px;   /* optional, space for scrollbar */
+  gap: 10px;
+  padding-right: 8px;
 }
 
 .scrollable-images::-webkit-scrollbar {
@@ -316,19 +308,18 @@ body, button {
 }
 
 .work-main {
-  flex: 1; /* take remaining space */
+  flex: 1;
 }
 
 .work-right {
-  width: 70px;  /* fixed width for the year */
+  width: 70px;
   text-align: right;
 }
 
-
 #computer-tab-body {
-  max-height: 60vh;      /* keeps modal from growing too tall */
-  overflow-y: auto;      /* enables vertical scroll */
-  padding-right: 12px;   /* avoids scrollbar covering text */
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 12px;
 }
 
 #computer-tab-body::-webkit-scrollbar {

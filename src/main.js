@@ -26,13 +26,12 @@ function updateCalendarDate() {
 // update immediately
 updateCalendarDate();
 
-// optional: update every second so time ticks
+// update every second so time ticks
 setInterval(updateCalendarDate, 1000);
 
 const songForm = document.getElementById("song-form");
 // const currentSongTitle = document.getElementById("current-song-title");
 
-// // Initialize title
 // currentSongTitle.textContent = "Currently listening to...";
 
 songForm.addEventListener("change", (e) => {
@@ -49,7 +48,6 @@ songForm.addEventListener("change", (e) => {
   }
 });
 
-// inside your main.js or script
 const tabLinks = document.querySelectorAll(".computer_modal .tab-link");
 const tabText = document.getElementById("computer-tab-text");
 
@@ -108,17 +106,13 @@ const tabContents = {
   contact: "Feel free to contact me at brandon.nguyen@yale.edu."
 };
 
-// Start on About
 tabText.innerHTML = tabContents["about"];
 
 tabLinks.forEach(link => {
   link.addEventListener("click", () => {
-    // Remove active class from all links
     tabLinks.forEach(l => l.classList.remove("active"));
-    // Add active to clicked link
     link.classList.add("active");
 
-    // Change the content
     const tab = link.getAttribute("data-tab");
     tabText.innerHTML = tabContents[tab];
   });
@@ -287,7 +281,7 @@ loader.load("/models/490BAKE_wmats.glb", (glb) => {
 const bgMusic = document.getElementById("bg-music");
 const musicToggle = document.getElementById("music-toggle");
 
-let musicOn = true; // starts on after Enter click
+let musicOn = true; 
 
 musicToggle.addEventListener("click", () => {
   if (!bgMusic) return;
@@ -443,7 +437,6 @@ const render = () => {
   
     if (currObject !== currentHoveredObject) {
       
-      // Reset old hovered object
       if (currentHoveredObject) {
         if (currentHoveredObject.name.includes("extend")) {
           playDrawerAnimation(currentHoveredObject, false);
@@ -452,7 +445,6 @@ const render = () => {
         }
       }
   
-      // Apply NEW animation depending on type
       if (currObject.name.includes("extend")) {
         playDrawerAnimation(currObject, true);
       } else {
@@ -465,7 +457,6 @@ const render = () => {
     document.body.style.cursor = "pointer";
   }
   else {
-    // No hover → reset active animations
     if (currentHoveredObject) {
       if (currentHoveredObject.name.includes("extend")) {
         playDrawerAnimation(currentHoveredObject, false);

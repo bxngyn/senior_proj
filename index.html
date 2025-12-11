@@ -10,6 +10,7 @@
   <body>
     <div id="app"></div>
 
+    <!-- loading screen -->
     <div id="loading-screen">
       <div id="loading-center">
         <div id="loading-text">
@@ -18,7 +19,6 @@
         
         <div id="enter-button">Enter</div>
       </div>
-    
       <div id="controls-hint">
         Click & drag to move camera <br> Pinch to zoom in/out
       </div>
@@ -27,57 +27,47 @@
 
     <audio id="bg-music" src="/audio/oscarpetersontrio.mp3" loop></audio>
 
+    <!-- computer screen -->
     <div class="modal computer_modal">
       <div class="modal-content computer-content">
-        
-        <!-- Tab links -->
         <div class="tab-links">
           <button class="tab-link active" data-tab="about">About</button>
           <button class="tab-link" data-tab="work">Work</button>
           <button class="tab-link" data-tab="contact">Contact</button>
         </div>
-    
-        <!-- Tab content -->
         <div class="tab-body" id="computer-tab-body">
           <p id="computer-tab-text">
-            <!-- Hi, I'm Brandon! I am currently a senior studying computer science at Yale University.   -->
           </p>
         </div>
-    
       </div>
-    
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- music poster -->
     <div class="modal beach_house_modal">
       <div class="modal-content">
-        
         <div class="modal-left">
           <img class="modal-image" src="/images/beachhouseposter.jpg" alt="Beach House Poster">
         </div>
-    
         <div class="modal-right">
           <h1 class="modal-title">Music</h1>
           <p class="modal-description">
             Listening to and playing music is one of my favorite things to do in my free time. <br><br> The poster on the left is of Beach House, a dream pop / shoegaze band that's one of my favorite artists (they were my #1 on my Spotify Wrapped this year!). Take a look at my <a href="https://open.spotify.com/user/panorrie?si=27a1d39bf0554db8">Spotify profile</a> to get a better taste of what I like to listen to :p <br><br> Also, find the headphones in the scene to change the music you're listening to right now.
           </p>
         </div>
-    
       </div>
-    
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- friend portrait -->
     <div class="modal ljr_modal beach_house_modal">
       <div class="modal-content">
-        
         <div class="modal-left scrollable-images">
           <img class="modal-image" src="/images/ljrphoto.jpeg" alt="Sunset 1">
           <img class="modal-image" src="/images/chilis.HEIC" alt="Sunset 2">
           <img class="modal-image" src="/images/viet.HEIC" alt="Sunset 3">
           <img class="modal-image" src="/images/shoubriley.jpg" alt="Sunset 3">
         </div>
-    
         <div class="modal-right">
           <h1 class="modal-title">my friends!!</h1>
           <p class="modal-description">
@@ -95,18 +85,16 @@
             I love them a lot!
           </p>
         </div>
-    
       </div>
-    
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- sunset poster -->
     <div class="modal sunset_modal beach_house_modal">
       <div class="modal-content">
         <div class="modal-left">
           <img class="modal-image" src="/images/sunsetposter.jpeg" alt="Sunset Poster">
         </div>
-    
         <div class="modal-right">
           <h1 class="modal-title"></h1>
           <p class="modal-description">
@@ -114,10 +102,10 @@
           </p>
         </div>
       </div>
-    
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- headphones -->
     <div class="modal headphone_modal">
       <div class="modal-content">
         <h1 class="modal-title">Currently listening to...</h1>
@@ -134,32 +122,23 @@
             <input type="radio" name="song" value="/audio/fuemejor_quiet.mp3">
             Fue Mejor by Kali Uchis (feat. SZA)
           </label><br>
-          <!-- <label>
-            <input type="radio" name="song" value="/audio/song4.mp3">
-            Song 4
-          </label><br>
-          <label>
-            <input type="radio" name="song" value="/audio/song5.mp3">
-            Song 5
-          </label> -->
         </form>
       </div>
-    
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- calendar  -->
     <div class="modal calendar_modal">
       <div class="modal-content">
-    
         <div class="modal-right">
           <p class="modal-description" id="calendar-date">
           </p>
         </div>
-    
       </div>
       <button class="modal-exit-button">leave</button>
     </div>
 
+    <!-- main canvas -->
     <div id="experience">
       <canvas id="experience-canvas" class="experience-canvas"></canvas>
     </div>
