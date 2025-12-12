@@ -3,6 +3,9 @@
 ## Author
 Brandon Nguyen
 
+## Live Demo
+https://youtu.be/v-_dw0Ffr8I?si=xm_-t3A_UqEDsWxb
+
 ## Setup and Installation
 
 Ensure that you have [Node.js](https://nodejs.org/en/download) v20+ installed on your machine.
